@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>if you feel anxious, click me crazily</title>
+    <meta name = "keywords" content="click me crazily,for fun,releax,don't anxious">
+    <meta name = "description" content="if you feel anxious, click me crazily">
+    <h1>if you feel anxious, click me crazily</h1>
+    <style>
+        body {
+            background-color: lightblue;
+            text-align: center;
+            font-family: Arial, sans-serif;
+        }
+        #clickButton {
+            padding: 20px;
+            font-size: 20px;
+        }
+        #counter {
+            font-size: 24px;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1>You could click the button as many as you can within 15 seconds</h1>
+    <button id="clickButton">click here crazily</button>
+    <div id="counter">0</div>
+
+    <script>
+        let counter = 0;
+        let timer;
+        let leaderboard = [];
+
+        document.getElementById('clickButton').addEventListener('click', function() {
+            if (counter === 0) {
+                timer = setTimeout(endGame, 15000);
+            }
+            counter++;
+            document.getElementById('counter').innerText = counter;
+        });
+
+        function endGame() {
+            clearTimeout(timer);
+            let username = prompt(`Congratulation!You click ${counter} times. You could put your user name：`);
+            if (username) {
+                leaderboard.push({ name: username, score: counter });
+                leaderboard.sort((a, b) => b.score - a.score);
+                if (leaderboard.length > 3) {
+                    leaderboard.pop();
+                }
+                alert(`ranking list:\n${leaderboard.map((entry, index) => `${index + 1}. ${entry.name}: ${entry.score}`).join('\n')}`);
+            }
+            counter = 0;
+            document.getElementById('counter').innerText = counter;
+        }
+    </script>
+</body>
+</html>
+
+
+
+
+
